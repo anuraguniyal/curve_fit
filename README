@@ -1,0 +1,94 @@
+Curve fitting on Schools
+-----------------------
+
+Looks like there is a strong corealtion between school demographics.
+Using scipy.curve_fit on few east-bay area schools (fremont) data
+
+Data
+-----
+$ cat fremont_schools.csv
+#school[0], eng[1], math[2], rating[3], asian[4], white[5], hispanic[6], black[7]
+Ardenwood Elementary School, 84, 85, 10, 77, 8, 3, 2
+Brookvale Elementary School, 68, 72, 10, 49, 21, 11, 3
+Joshua Chadbourne Elementary School, 83, 88, 10, 88, 6, 3, 1
+Forest Park Elementary School, 83, 88, 10, 87, 4, 2, 2
+John Gomes Elementary School, 88, 91, 10, 89, 5, 2, 0
+Harvey Green Elementary School, 70, 72, 10, 44, 20, 22, 2
+O. N. Hirsch Elementary School, 70, 74, 10, 53, 17, 15, 3
+James Leitch Elementary School, 82, 88, 10, 84, 6, 3, 0
+Mission San Jose Elementary School, 90, 92, 10, 89, 4, 3, 0
+Mission Valley Elementary School, 85, 87, 10, 86, 5, 4, 1
+Niles Elementary School, 71, 73, 10, 45, 27, 14, 2
+Parkmont Elementary School, 80, 79, 10, 68, 13, 10, 2
+Warm Springs Elementary School, 84, 88, 10, 81, 9, 2, 1
+Fred E. Weibel Elementary School, 84, 88, 10, 82, 7, 4, 1
+Glenmoor Elementary School, 66, 62, 9, 33, 20, 30, 4
+Steven Millard Elementary School, 62, 64, 9, 39, 18, 26, 3
+Oliveira Elementary School, 58, 60, 9, 48, 12, 21, 6
+Warwick Elementary School, 65, 63, 9, 50, 18, 12, 3
+Joseph Azevada Elementary School, 53, 51, 8, 38, 17, 25, 2
+J. Haley Durham Elementary School, 50, 53, 8, 31, 14, 31, 7
+Tom Maloney Elementary School, 54, 54, 8, 45, 26, 13, 3
+John G. Mattos Elementary School, 52, 54, 8, 40, 28, 16, 2
+Patterson Elementary School, 52, 53, 8, 39, 16, 19, 5
+Brier Elementary School, 48, 44, 7, 33, 15, 35, 5
+E. M. Grimmer Elementary School, 42, 41, 7, 15, 11, 63, 1
+Vallejo Mill Elementary School, 47, 49, 7, 22, 27, 27, 7
+John Blacow Elementary School, 37, 34, 6, 12, 11, 61, 4
+Cabrillo Elementary School, 39, 37, 6, 20, 8, 50, 9
+
+School Ratings (1-10)
+----------------------
+$ python curve_fit.py fremont_schools.csv 4,5,6,7,3
+equation parameters
+[ 0.01707636  0.01767445 -0.03696251 -0.12920189  8.80735665]
+covariance
+[[  2.24075293e-03   3.05324700e-03   2.30929301e-03   4.24764723e-03
+   -2.17606519e-01]
+ [  3.05324700e-03   4.48717495e-03   3.14102556e-03   5.47396983e-03
+   -3.00083932e-01]
+ [  2.30929301e-03   3.14102556e-03   2.46017424e-03   4.05112070e-03
+   -2.24749799e-01]
+ [  4.24764723e-03   5.47396983e-03   4.05112070e-03   1.28907681e-02
+   -4.15950515e-01]
+ [ -2.17606519e-01  -3.00083932e-01  -2.24749799e-01  -4.15950515e-01
+    2.12176442e+01]]
+Ardenwood Elementary School actual = 10.0 calculated = 9.9  diff = 1.1%
+Brookvale Elementary School actual = 10.0 calculated = 9.2  diff = 7.8%
+Joshua Chadbourne Elementary School actual = 10.0 calculated = 10.2  diff = -1.8%
+Forest Park Elementary School actual = 10.0 calculated = 10.0  diff = -0.3%
+John Gomes Elementary School actual = 10.0 calculated = 10.3  diff = -3.4%
+Harvey Green Elementary School actual = 10.0 calculated = 8.8  diff = 11.6%
+O. N. Hirsch Elementary School actual = 10.0 calculated = 9.1  diff = 9.3%
+James Leitch Elementary School actual = 10.0 calculated = 10.2  diff = -2.4%
+Mission San Jose Elementary School actual = 10.0 calculated = 10.3  diff = -2.9%
+Mission Valley Elementary School actual = 10.0 calculated = 10.1  diff = -0.9%
+Niles Elementary School actual = 10.0 calculated = 9.3  diff = 7.2%
+Parkmont Elementary School actual = 10.0 calculated = 9.6  diff = 4.3%
+Warm Springs Elementary School actual = 10.0 calculated = 10.1  diff = -1.5%
+Fred E. Weibel Elementary School actual = 10.0 calculated = 10.1  diff = -0.5%
+Glenmoor Elementary School actual = 9.0 calculated = 8.1  diff = 10.0%
+Steven Millard Elementary School actual = 9.0 calculated = 8.4  diff = 6.2%
+Oliveira Elementary School actual = 9.0 calculated = 8.3  diff = 7.9%
+Warwick Elementary School actual = 9.0 calculated = 9.1  diff = -1.6%
+Joseph Azevada Elementary School actual = 8.0 calculated = 8.6  diff = -7.2%
+J. Haley Durham Elementary School actual = 8.0 calculated = 7.5  diff = 5.8%
+Tom Maloney Elementary School actual = 8.0 calculated = 9.2  diff = -14.6%
+John G. Mattos Elementary School actual = 8.0 calculated = 9.1  diff = -14.2%
+Patterson Elementary School actual = 8.0 calculated = 8.4  diff = -5.1%
+Brier Elementary School actual = 7.0 calculated = 7.7  diff = -9.9%
+E. M. Grimmer Elementary School actual = 7.0 calculated = 6.8  diff = 2.9%
+Vallejo Mill Elementary School actual = 7.0 calculated = 7.8  diff = -10.8%
+John Blacow Elementary School actual = 6.0 calculated = 6.4  diff = -7.3%
+Cabrillo Elementary School actual = 6.0 calculated = 6.3  diff = -4.7%
+
+Except few schools formula is within -+ 10%
+
+Formula
+-------
+Paramters printed by curev fit are
+[ 0.01707636  0.01767445 -0.03696251 -0.12920189  8.80735665]
+
+that means
+rating = 8.8 + 0.01707636*Asian + 0.01767445*White - 0.03696251*Hispanic - 0.12920189*Black
+
