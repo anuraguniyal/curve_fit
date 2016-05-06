@@ -56,7 +56,7 @@ def curve_fit_csv(csv_file, indices):
         for i, x in enumerate(x_values):
             x_ar[i].append(float(x))
 
-    p0 = [1]*(len(x_ar)+1)
+    p0 = [1]*(len(x_ar))
     popt, pcov = curve_fit(fn, scipy.array(x_ar), scipy.array(y_ar), scipy.array(p0))
     print "equation parameters"
     print popt
