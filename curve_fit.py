@@ -33,7 +33,7 @@ def test():
     popt, pcov = curve_fit(fn, scipy.array(x_ar), scipy.array(y_ar), p0)
     print popt
 
-def curve_fit_csv(csv_file, indices):
+def curve_fit_csv(csv_file, indices, constant):
     x_ar = None
     y_ar = []
     names = []
@@ -56,7 +56,7 @@ def curve_fit_csv(csv_file, indices):
         for i, x in enumerate(x_values):
             x_ar[i].append(float(x))
 
-    p0 = [1]*(len(x_ar))
+    p0 = [1]*(len(x_ar)+constant)
     popt, pcov = curve_fit(fn, scipy.array(x_ar), scipy.array(y_ar), scipy.array(p0))
     print "equation parameters"
     print popt
@@ -78,4 +78,9 @@ if __name__ == "__main__":
         indices = [int(i) for i in sys.argv[2].split(",")]
     except IndexError,e:
         indices = None
-    curve_fit_csv(sys.argv[1], indices)
+    try:
+        sys.argv[3]
+        constant = 0
+    except:
+        constant = 1
+    curve_fit_csv(sys.argv[1], indices, constant)
