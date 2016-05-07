@@ -66,9 +66,12 @@ def curve_fit_csv(csv_file, indices, constant):
         return
     # if indices given lets print each row calculation
     for i, name in enumerate(names):
-        calculated = popt[-1] # constant part
-        for xi, p in enumerate(popt[:-1]):
-            calculated += x_ar[xi][i]*p
+        calculated = 0
+        for xi, p in enumerate(popt):
+            if xi >= len(x_ar):
+                calculated += p
+            else:
+                calculated += x_ar[xi][i]*p
         diff = (y_ar[i]-calculated)*100/y_ar[i]
         print "%s actual = %.1f calculated = %.1f  diff = %.1f%%"%(name, y_ar[i], calculated, diff)
 
